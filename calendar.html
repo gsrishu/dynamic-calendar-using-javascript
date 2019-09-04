@@ -1,0 +1,99 @@
+<!DOCTYPE >
+<html>
+  <head>
+  <body class="base-color">
+  <style>
+      li.days {
+        display: inline-block;
+        border: 1px solid gray;
+        height: 100vh;
+      }
+     
+     
+
+      .text-black {
+        color: black;
+      }
+
+      .text-red {
+        color: crimson;
+      }
+      .day-name {
+        padding: 5px;
+        background: #f5f5f5;
+      }
+      .day-number {
+        padding: 5px;
+        border-bottom: 1px solid black;
+        background: #f5f5f5;
+      }
+
+      .container {
+        display: block;
+        white-space: nowrap;
+       /* overflow: auto;
+        height: 100vh;*/
+        text-align: center;
+      }
+
+      ul.days-wrapper {
+        padding: 0;
+      }
+      body {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+     <div id="main" class="container">
+      <div>
+        <p id="monthName"></p>
+      </div>
+    </div>
+    <script>
+      var noDays = new Date(2019, 8, 0).getDate(); //new Date(year, month, 0).getDate();
+      var days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+        months = [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",          
+          "Dec"
+        ],
+        counter = 0,
+        liCon = "",
+        date = new Date();
+      document.getElementById("monthName").innerText = months[date.getMonth()];
+      var t = document.createElement("ul");
+      t.classList.add("days-wrapper");
+       var calMonth=date.getMonth()+1;
+      for (var i = 01; i <= noDays; i++) {
+        console.log(i, days[counter], counter);
+        //var calId=i+
+        var liString = `<li class="days ${
+          days[counter] == "Su" ? "text-red" : "text-black"
+        }">
+          <div class='day-name'>${days[counter]}</div>
+          <div class='day-number' id='${i+'-'+calMonth+'-'+date.getFullYear()}'>${i}</div>
+        </li>`;
+        liCon = liCon + liString;
+        counter++;
+        if (i % 7 === 0) {
+          //get the day name printed
+          counter = 0;
+          console.log(t, liCon);
+        }
+        t.innerHTML = liCon;
+        console.log(t);
+        document.getElementById("main").appendChild(t);
+      }
+
+    </script>  <script src="node_modules/jquery/dist/jquery.min.js"></script> 
+  </body>
+</html>
